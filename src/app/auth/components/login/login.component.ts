@@ -1,17 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.sass']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  error$: Observable<string | null>;
 
   constructor(
-    private fb: FormBuilder,
+    public fb: FormBuilder,
     private authService: AuthService,
   ) {
   }
@@ -32,8 +34,11 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
+    const username: string = this.loginForm.value.username;
+    const password: string = this.loginForm.value.password;
     if (this.loginForm.valid) {
-      this.authService.login(this.username.value, this.password.value);
+      // TODO: add pipe and subscribe
+      this.authService.login(username, password);
     }
   }
 
