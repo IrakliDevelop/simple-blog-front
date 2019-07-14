@@ -43,13 +43,13 @@
 
             <div class="md-form">
               <input type="text" id="firstname" class="form-control" formControlName="firstname" mdbInput>
-              <label for="firstname">Username</label>
+              <label for="firstname">First Name</label>
               <mdb-error *ngIf="firstname && firstname.invalid && (firstname.dirty || firstname.touched)">First Name is required</mdb-error>
             </div>
 
             <div class="md-form">
               <input type="text" id="lastname" class="form-control" formControlName="lastname" mdbInput>
-              <label for="lastname">Username</label>
+              <label for="lastname">Last Name</label>
               <mdb-error *ngIf="lastname && lastname.invalid && (lastname.dirty || lastname.touched)">Last Name is required</mdb-error>
             </div>
 
