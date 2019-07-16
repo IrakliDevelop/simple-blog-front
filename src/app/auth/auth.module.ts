@@ -5,6 +5,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonsModule, CardsModule, InputsModule, InputUtilitiesModule, WavesModule } from 'angular-bootstrap-md';
+import { NgxLoadingModule } from 'ngx-loading';
 import { AuthService } from './services/auth.service';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { AuthService } from './services/auth.service';
     ButtonsModule,
     WavesModule,
     InputsModule,
+    NgxLoadingModule.forRoot({}),
   ],
   exports: [RegisterComponent],
   providers: [AuthService]
