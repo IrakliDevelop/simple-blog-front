@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (error.status === 404) {
       errorText = 'Invalid Username';
     } else if (error.status === 406) {
-      errorText = 'Invaid Password';
+      errorText = 'Invalid Password';
     } else {
       errorText = 'Something went wrong';
     }
