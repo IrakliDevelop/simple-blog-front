@@ -19,4 +19,7 @@ export class AuthService {
   register(username, password, firstname, lastname): Observable<any> {
     return this.http.post(`${this.URL}/api/auth/register`, {username, password, firstname, lastname});
   }
+  setToken(token: string): void {
+    localStorage.setItem('access_token', token);
+  }
 }
