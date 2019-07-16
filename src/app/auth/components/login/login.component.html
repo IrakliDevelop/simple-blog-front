@@ -14,8 +14,8 @@
         <!--Card content-->
         <mdb-card-body class="px-lg-5 pt-0">
           <!-- TODO: error handling -->
-          <div *ngIf="error$ | async as error" class="alert alert-danger" role="alert">
-            {{ error }}
+          <div *ngIf="error" class="alert alert-danger" role="alert">
+            {{ errorHandler(error) }}
           </div>
           <!-- Form -->
           <form [formGroup]="loginForm" class="text-center" style="color: #757575;">
