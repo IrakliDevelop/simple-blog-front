@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl, FormBuilder, FormControl, FormGroup, Validators,
 } from '@angular/forms';
-import { Subject } from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {finalize, pluck, takeUntil} from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 
@@ -13,7 +13,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
-  error: any;
+  error$: BehaviorSubject<any | null>;
   private loading: boolean;
   unsubscribe$: Subject<void>;
 
@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.unsubscribe$ = new Subject<void>();
+    this.error$ = new BehaviorSubject<any|null>(null);
     this.loginForm = this.fb.group({
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', Validators.required)
@@ -51,11 +52,12 @@ export class LoginComponent implements OnInit, OnDestroy {
           finalize(() => this.loading = false)
           )
         .subscribe(token => {
+          this.error$.next(null);
           this.authService.setToken(token);
         },
           err => {
-            console.log(err);
-            this.error = err;
+            console.error(err);
+            this.error$.next(err);
           });
     }
   }

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, Subject } from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { AuthService } from '../../services/auth.service';
@@ -13,7 +13,7 @@ import { AuthService } from '../../services/auth.service';
 export class RegisterComponent implements OnInit, OnDestroy {
   registerForm: FormGroup;
   // TODO: implement this
-  error$: Observable<string | null>;
+  error$: BehaviorSubject<any | null>;
   unsubscribe$: Subject<void>;
 
   constructor(
@@ -24,6 +24,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.unsubscribe$ = new Subject<void>();
+    this.error$ = new BehaviorSubject<any|null>(null);
     this.registerForm = this.fb.group({
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -53,7 +54,22 @@ export class RegisterComponent implements OnInit, OnDestroy {
     // TODO: pipe and subscribe
     this.authService.register(username, password, firstname, lastname)
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(data => console.log(data));
+      .subscribe(data => {
+        console.log(data);
+        this.error$.next(null);
+      }, err => {
+        console.error(err);
+        this.error$.next(err);
+      });
+  }
+  errorHandler(error: any): string {
+    let errorText = '';
+    if (error.status === 406) {
+      errorText = 'Username is already taken';
+    } else {
+      errorText = 'Something went wrong';
+    }
+    return errorText;
   }
 
   ngOnDestroy(): void {
