@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
 
@@ -19,6 +20,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   constructor(
     public fb: FormBuilder,
     private authService: AuthService,
+    public router: Router,
   ) {
   }
 
@@ -57,6 +59,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         console.log(data);
         this.error$.next(null);
+        this.router.navigate(['/login']);
       }, err => {
         console.error(err);
         this.error$.next(err);
