@@ -5,6 +5,7 @@ import {
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {finalize, pluck, takeUntil} from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     public fb: FormBuilder,
     private authService: AuthService,
+    public router: Router,
   ) {
   }
 
@@ -54,6 +56,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         .subscribe(token => {
           this.error$.next(null);
           this.authService.setToken(token);
+          this.router.navigate(['/profile']);
         },
           err => {
             console.error(err);
