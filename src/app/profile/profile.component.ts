@@ -28,7 +28,6 @@ export class ProfileComponent implements OnInit {
         this.user.avatar = this.gravatarService.getUserGravatar(this.user.username);
       }
     });
-    console.log(this.userService.decodeToken());
   }
 
   onLogout(): void {
