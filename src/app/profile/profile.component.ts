@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
+import { User } from '../shared/models/user.model';
 import {ProfileService} from './services/profile.service';
+import {UserService} from '../shared/services';
+import {GravatarService} from '../shared/services';
 
 @Component({
   selector: 'app-profile',
@@ -8,12 +12,27 @@ import {ProfileService} from './services/profile.service';
 })
 export class ProfileComponent implements OnInit {
 
+  user: User;
+
   constructor(
     private profileService: ProfileService,
+    private userService: UserService,
+    private gravatarService: GravatarService,
   ) { }
 
   ngOnInit() {
-    this.profileService.getUserInfo().subscribe(data => console.log(data));
+    this.user = {};
+    this.profileService.getUserInfo().subscribe(data => {
+      this.user = data;
+      if (!this.user.avatar) {
+        this.user.avatar = this.gravatarService.getUserGravatar(this.user.username);
+      }
+    });
+    console.log(this.userService.decodeToken());
+  }
+
+  onLogout(): void {
+    this.userService.logOut();
   }
 
 }

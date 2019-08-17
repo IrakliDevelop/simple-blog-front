@@ -1,1 +1,62 @@
-<p>profile works!</p>
+<div class="white px-4 section-header">
+  <h3>Profile</h3>
+  <p class="grey-text pt-3">Change your personal information</p>
+</div>
+
+<div class="container py-5">
+  <div class="row mx-auto py-5">
+    <div class="col-md-4 mt-3">
+      <mdb-card>
+        <mdb-card-body>
+          <div class="text-center">
+            <div class="avatar" style="margin-top: -60px">
+              <img *ngIf="user.avatar" src="{{ user.avatar }}" height="96" width="96" class="rounded-circle z-depth-0"
+                   alt="avatar image">
+            </div>
+
+            <h3 class="mt-4">{{ user.username }}</h3>
+
+            <a mdbBtn class="mt-3" color="primary" (click)="onLogout()">
+              <i class="fa fa-sign-out"></i>
+              Logout
+            </a>
+          </div>
+        </mdb-card-body>
+      </mdb-card>
+
+    </div>
+    <div class="col-md-8 mt-3">
+      <mdb-card>
+        <mdb-card-body>
+          <h3 class="h2-responsive mb-4">
+            <strong>Edit profile</strong>
+          </h3>
+
+          <!--Body-->
+          <form>
+            <h5 class="h5-responsive">Display name</h5>
+            <div class="md-form">
+              <i class="fa fa-user prefix"></i>
+              <input type="text" id="form1" class="form-control" mdbInput/>
+              <label for="form1">Display name</label>
+            </div>
+
+            <h5 class="h5-responsive">Photo Url</h5>
+            <div class="md-form">
+              <i class="fa fa-user prefix"></i>
+              <input type="text" id="form2" class="form-control" mdbInput/>
+              <label for="form2">Photo Url</label>
+            </div>
+
+            <div class="text-right">
+              <button type="button" mdbBtn color="primary">Update profile</button>
+            </div>
+          </form>
+        </mdb-card-body>
+      </mdb-card>
+
+    </div>
+  </div>
+</div>
+
+
