@@ -6,6 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import {DropdownModule, NavbarModule, WavesModule} from 'angular-bootstrap-md';
 import { FooterComponent } from './footer/footer.component';
 import {RouterModule} from '@angular/router';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [HomeComponent, MainComponent, HeaderComponent, FooterComponent],
@@ -16,6 +17,7 @@ import {RouterModule} from '@angular/router';
     NavbarModule,
     RouterModule,
     DropdownModule.forRoot(),
+    SharedModule,
   ],
   exports: [HomeComponent, MainComponent, HeaderComponent, FooterComponent]
 })
