@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from '../shared/models/user.model';
+import { User } from '../core/models';
 import {ProfileService} from './services/profile.service';
 import {UserService} from '../shared/services';
 import {GravatarService} from '../shared/services';

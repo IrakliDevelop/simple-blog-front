@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           pluck('token'),
           finalize(() => this.loading = false)
           )
-        .subscribe(token => {
+        .subscribe((token: string) => {
           this.error$.next(null);
           this.authService.setToken(token);
           this.router.navigate(['/profile']);
